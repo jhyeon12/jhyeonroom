@@ -42,7 +42,7 @@ public class Member {
 	}
 
 	public static void main(String[] args) {
-		Member m1 = new Member("aaa", "010-7777-7777", "동시통역", 3, "aaa@gmail.com", 930101, "서울");
+		Member m1 = new Member("aaa\n", "010-7777-7777\n", "동시통역\n", 3, "aaa@gmail.com\n", 930101, "서울\n");
 		m1.print();
 		System.out.println("\n=========================================\n");
 		Member m2 = new Member("bbb", "010-7777-7777", "동시통역", 3, "aaa@gmail.com");

@@ -1,16 +1,17 @@
 package Project01;
 import java.util.Scanner;
 public class Contact {
-   String name;
-   String phoneNum;
-   String mail;
-   String address;
-   int birth;
-   String group;
+  //아래의 데이터를 저장 이름, 전화번호, 이메일, 주소, 생일, 그룹
+   private String name;
+   private String phoneNum;
+   private String mail;
+   private String address;
+   private int birth;
+   private String group;
    Scanner scanner = new Scanner(System.in);
 	
 
-
+// getter() 와 setter() 정의
 public String getName() {
 	return name;
 }
@@ -49,7 +50,7 @@ public void setGroup(String group) {
 }
    
 public Contact() {}
-
+// 생성자
 public Contact(String name, String phoneNum, String mail, String address, int birth, String group) {
 	this.name = name;
 	this.phoneNum = phoneNum;
@@ -59,6 +60,7 @@ public Contact(String name, String phoneNum, String mail, String address, int bi
 	this.group = group;
 	
 }
+// 정보 출력 메소드
 public void printData(Contact user) {
 
 	System.out.println("이름을 입력해주세요.");

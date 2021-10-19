@@ -1,6 +1,6 @@
 package exam;
 
-public class Ex07 {
+public class Ex02 {
 
 	
 	//	문제 1.

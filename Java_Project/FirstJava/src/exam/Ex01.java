@@ -1,6 +1,6 @@
 package exam;
 
-public class Ex06 {
+public class Ex01 {
 public static void main(String[] args) {
 //	문제 1. 다음 형태로 String 인스턴스를 생성.
 //    String str = “ABCDEFGHIJKLMN”;

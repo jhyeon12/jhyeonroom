@@ -8,22 +8,21 @@ public class ExceptionTest4 {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("피제수를 입력해주세요.");
-		int num1 = sc.nextInt();
-		System.out.println("제수를 입력해주세요");
-		int num2 = sc.nextInt();
-
 		try {
-			System.out.println(num1 / num2);
+			System.out.println(10/2);
+			return;
 		} catch (Exception e) {
-			System.out.println("예외!!!!");
-		} catch (ArithmeticException e) {
-			System.out.println("0으로 나누기를 할 수 없습니다.");
+			System.out.println("예외 발생 = 예외처리");
 			System.out.println(e.getMessage());
-		} 
+		} finally {
+			System.out.println("예외상황과 상관 없이 실행");
+		}
 		
-		System.out.println("프로그램을 종료 합니다.");
+		try {
+			System.out.println("try");
+		} finally {
+			System.out.println("finally");
+		}
 		
-
 	}
 }

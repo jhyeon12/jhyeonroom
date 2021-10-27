@@ -1,7 +1,9 @@
 package ver07;
 
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -11,18 +13,18 @@ public class SmartPhoneUsedMap {
 	// ① Contact 클래스의 인스턴스 10개를 저장 할 수 있는 배열을 정의합시다.
 		// ② 배열에 인스턴스를 저장하고, 수정하고, 삭제, 저장된 데이터의 리스트를 출력하는 메소드를 정의합니다.
 
-		private Set<Contact> contacts;
+		private Map<String, Contact> contacts;
 
 		public static Scanner sc = new Scanner(System.in);
 
 		// 생성자 : ArrayList() 생성
 		public SmartPhoneUsedMap(int size) {
-			contacts = new HashSet<Contact>(size);
+			contacts = new HashMap<String, Contact>();
 		}
 
 		// 배열에 요소를 추가하는 메소드 : 참조값을 전달 받아 배열에 추가 하는 기능
 		public void addContact(Contact contact) {
-			contacts.add(contact);
+			contacts.put(contact.getName(), contact);
 			System.out.println("데이터가 저장되었습니다.");
 		}
 
@@ -166,9 +168,12 @@ public class SmartPhoneUsedMap {
 			boolean chk = false;
 			// 배열 반복하면서 전화번호 비교 -> 같은 번호가 있으면 -> chk=true
 			
-			Iterator<Contact> itr = contacts.iterator();
+			// key : Map의  key -> Set<k>
+			Set<String> set = contacts.keySet();
+			
+			Iterator<String> itr = set.iterator();
 			while(itr.hasNext()) {
-				if (itr.next().getPhoneNumber().equals(number)) {
+				if (contacts.get(itr.next()).getPhoneNumber().equals(number)) {
 					chk = true;
 					break;
 				}
@@ -202,9 +207,10 @@ public class SmartPhoneUsedMap {
 							throw new PhoneNumberPatternException();
 						}
 						
-						Iterator<Contact> itr = contacts.iterator();
+						Iterator<String> itr = contacts.keySet().iterator();
+						
 						while(itr.hasNext()) {
-							if (itr.next().getPhoneNumber().equals(number)) {
+							if (contacts.get(itr.next()).getPhoneNumber().equals(number)) {
 								// 예외 처리
 								throw new DuplicatePhoneNumberException();
 							}
@@ -241,8 +247,8 @@ public class SmartPhoneUsedMap {
 //				System.out.println("------------------");
 //			}
 			// for-each
-			for(Contact c : contacts) {
-				c.printContact();
+			for(String s : contacts.keySet()) {
+				contacts.get(s).printContact();
 				System.out.println("------------------");
 			}
 
@@ -257,8 +263,8 @@ public class SmartPhoneUsedMap {
 //				contacts[i].printSimpleData();
 //				System.out.println("------------------");
 //			}
-			for(Contact c : contacts) {
-				c.printSimpleData();
+			for(String s : contacts.keySet()) {
+				contacts.get(s).printSimpleData();
 				System.out.println("-------------------");
 			}
 		}
@@ -270,24 +276,20 @@ public class SmartPhoneUsedMap {
 			System.out.println("찾고자 하는 이름을 입력하세요. >>");
 			String name = getString();
 			
-			boolean searchChk = false;
+			Contact contact = contacts.get(name);
 			
-			Iterator<Contact> itr = contacts.iterator();
-			while(itr.hasNext()) {
-				 Contact c = itr.next();
-				 if(c.getName().equals(name)) {
-					 c.printContact();
-					 searchChk = true;
-					 break;
-				 }
+			if(contact != null) {
+				contact.printContact();
+			}else {
+				System.out.println("검색하신 이름" + name + "의 데이터가 존재하지 않습니다.");
+			}
+				
 			}
 			
-			if(!searchChk) {
-				System.out.println("검색하신 이름 " + name + " 의 데이터가 존재하지 않습니다.");
-			}
+			
 
 			
-		}
+		
 
 		// 이름으로 검색 -> 해당 데이터 삭제
 		public void deleteContact() {
@@ -296,21 +298,13 @@ public class SmartPhoneUsedMap {
 			System.out.println("삭제하고자하는 데이터의 이름을 입력하세요. >>");
 			String name = getString();
 
-			Iterator<Contact> itr = contacts.iterator();
+			Contact contact = contacts.get(name);
 			
-			boolean searchCheck = false;
-			
-			while(itr.hasNext()) {
-				if(itr.next().getName().equals(name)) {
-					 itr.remove();
-					 System.out.println(name + " 의 데이터가 삭제되었습니다.");
-					 searchCheck = true;
-					 break;
-				}
-			}
-
-			if(!searchCheck) {
-				System.out.println("검색하신 이름 " + name + " 의 데이터가 존재하지 않습니다.");
+			if(contact != null) {
+				contacts.remove(name);
+				System.out.println("데이터가 삭제되었습니다.");
+			}else {
+				System.out.println("검색하신 이름" + name + "의 데이터가 존재하지 않습니다.");
 			}
 			
 		}
@@ -322,22 +316,15 @@ public class SmartPhoneUsedMap {
 			System.out.println("변경을 원하는 정보의 이름을 입력하세요. >>");
 			String name = getString();
 			
-			Contact contact = null;
 
-			// 반복을 통해 이름이 같은 Contact 객체를 찾고 -> contact 변수에 참조값을 저장
-			Iterator<Contact> itr = contacts.iterator();
-			while(itr.hasNext()) {
-				Contact c = itr.next();
-				if(c.getName().equals(name)) {
-					contact = c;
-					break;
-				}
-			}
+			Contact contact = contacts.get(name);
+			
+			
 
 			if (contact == null) {
 				System.out.println("찾으시는 이름 " + name + " 의 정보가 존재하지 않습니다.");
 			} else {
-				System.out.println("데이터 수정을 위해 각가의 데이터를 입력하세요.....");
+				System.out.println("데이터 수정을 위해 각각의 데이터를 입력하세요.....");
 
 				System.out.println("이름 >>");
 				String ename = getString();
@@ -357,7 +344,7 @@ public class SmartPhoneUsedMap {
 				System.out.println("그룹 >>");
 				String group = getString();
 
-				// 회사 동료인지 고객인지 분기
+				// 회사 동료인지 고객인지 나누기
 				if (contact instanceof CompanyContact) {
 
 					CompanyContact companyContact = (CompanyContact) contact;
@@ -400,6 +387,10 @@ public class SmartPhoneUsedMap {
 					customerContact.setProduct(product);
 					customerContact.setJob(job);
 				}
+				
+				// 기존 데이터 삭제 -> 데이터 추가 ==> 수정
+				contacts.remove(name);
+				contacts.put(ename, contact);
 
 				System.out.println(name + " 의 정보가 수정되었습니다.");
 

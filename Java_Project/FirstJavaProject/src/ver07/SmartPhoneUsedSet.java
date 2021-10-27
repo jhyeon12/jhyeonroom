@@ -23,7 +23,7 @@ public class SmartPhoneUsedSet {
 		// 배열에 요소를 추가하는 메소드 : 참조값을 전달 받아 배열에 추가 하는 기능
 		public void addContact(Contact contact) {
 			contacts.add(contact);
-			System.out.println("데이터가 저장되었습니다.");
+			//System.out.println("데이터가 저장되었습니다.");
 		}
 
 		// 사용자로 부터 데이터를 받아 Contact 객체를 생성하고 배열에 참조값을 저장 메소드 호출

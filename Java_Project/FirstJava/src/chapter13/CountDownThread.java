@@ -5,8 +5,7 @@ public class CountDownThread extends Thread {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		super.run();
+		
 		
 		for(int i =10; i>0; i--) {
 			

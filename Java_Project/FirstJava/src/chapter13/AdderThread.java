@@ -13,7 +13,7 @@ public class AdderThread extends Sum implements Runnable{
 	@Override
 	public void run() {
 		
-		for(int i = this.start; i<this.end; i++) {
+		for(int i = this.start; i<=this.end; i++) {
 			addNum(i);
 		}
 		

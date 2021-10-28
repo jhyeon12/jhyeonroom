@@ -18,7 +18,7 @@ public class ShowThread extends Thread{
 			// 매개변수로 전달된 시간 만클 블로상태가 된다.
 			// 조건이 만족하면 (지정된 시간이 지나면) 실행 가능상태로 전환
 			try {
-				sleep(100/1000);
+				sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

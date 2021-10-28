@@ -20,6 +20,7 @@ public class ThreadTest6 {
 			e.printStackTrace();
 		}
 
+		inst.showAllNumber();
 	}
 
 	

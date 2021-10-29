@@ -22,9 +22,7 @@ from emp
 ;
 ​
 --20. 올해 며칠이 지났는지 출력하시오. 현재날짜에서 올해 1월 1일을 뺀 결과를 출력하고 TO_DATE 함수를 사용하여 데이터 형을 일치 시키시오.​
-select trunc(sysdate - to_date('2021.01.01.', 'YYYY.MM.DD.'))
-from dual
-;
+select trunc(sysdate - to_date('2021.01.01.', 'YYYY.MM.DD.')) from dual;
 
 --21. 사원들의 상관 사번을 출력하되 상관이 없는 사원에 대해서는 NULL 값 대신 0으로 출력하시오.
 select ename, nvl(mgr, 0)

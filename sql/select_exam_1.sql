@@ -105,7 +105,7 @@ where hiredate between '81/02/20' and '81/05/01'
 
 select ename, deptno
 from emp
-where deptno = 10 or deptno = 20  order by ename asc
+where deptno = 10 or deptno = 20  order by ename desc
 ;
 
 ​

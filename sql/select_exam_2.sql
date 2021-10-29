@@ -16,18 +16,28 @@ from book
 where price >= 20000
 ;
 --(3) 박지성의총구매액(박지성의고객번호는1번으로놓고작성)
-
+select sum(saleprice) as "총구매액"
+from orders
+where custid = 1
+;
 --(4) 박지성이구매한도서의수(박지성의고객번호는1번으로놓고작성)
-
+select count(custid) as "구매한 도서수"
+from orders
+where custid = 1
+;
 
 
 
 --2 마당서점의운영자와경영자가요구하는다음질문에대해SQL 문을작성하시오.
 
 --(1) 마당서점도서의총개수
-
+select count(*) as "도서의 총 개수"
+from book
+;
 --(2) 마당서점에도서를출고하는출판사의총개수
-
+select count(distinct publisher) as "출판사의 총 개수"
+from book
+;
 --(3) 모든고객의이름, 주소
 select name, address
 from customer

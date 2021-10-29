@@ -77,5 +77,107 @@ select trunc(sysdate - to_date('1993-11-04', 'YYYY-MM-DD')) from dual;
 
 
 --문자 -> 숫자 to_number(원본, 패턴)
++select to_number('100,000', '9,999,999') + 100000 from dual;
+
+
+-- switch case 와 유사한 decode 함수
+-- emp 테이블에서 사원 이름, 부서번호, 부서이름 출력
+ select * from dept;
+ SELECT * FROM EMP;
+ select ename, deptno, 
+        decode(deptno,
+            10, 'ACCOUNT',
+            20, 'RESEARCH',
+            30, 'SALES',
+            40, 'OPERATIONS'
+        ) as dname
+ from emp
+ ;
+
+-- 직급에 따라 급여를 인상하도록 하자. 
+-- 직급이 'ANALYST'인 사원은 5%, 
+--       'SALESMAN'인 사원은 10%, 
+--       'MANAGER'인 사원은 15%, 
+--       'CLERK'인 사원은 20%인 인상한다.
+select ename, job, sal,
+        decode(job, 
+            'ANALYST', sal*1.05,
+            'SALESMAN', sal*1.1,
+            'MANAGER', sal*1.15,
+            'CLERK', sal*1.2
+        ) as upSal
+from emp
+;
+
+-- case when then : if else if 와 유사 -> 조건식을 = 이외의 비교 연산을 할 수 있다.
+select ename, sal,
+    case 
+        when sal >= 3000 then sal*1.1
+        when sal < 3000 then sal*2
+    end as upsal
+from emp
+;
+
+
+------------------------------------------
+-- 집합 함수 ( 그룹 함수 ) 
+-- 하나의 행의 컬럼이 대상이 아니고,  행 그룹의 컬럼들(집합)이 대상
+-------------------------------------------
+select
+    to_char(sum(sal)*1200, 'L999,999,999') as "월 급여 총액",
+    to_char(round(avg(sal)*1200), 'L999,999,999') as "월 급여 평균",
+    count(*) as "총 사원의 수",
+    count(comm) as "커미션 등록 수",
+    sum(comm) as "커미션 합",
+    avg(comm) as "커미션 평균",
+    max(sal) as "가장 높은 급여",
+    min(sal) as "가장 낮은 급여"
+from emp
+;
+
+-- 상원들의 업무의 개수
+
+select count(distinct job) from emp;
+
+
+
+-- 각 부서별 급여의 총 합
+
+select  sum(sal), avg(sal)
+from emp
+where deptno = 10
+;
+select  sum(sal)
+from emp
+where deptno = 20
+;
+select  sum(sal)
+from emp
+where deptno = 30
+;
+
+select * from emp order by deptno;
+
+-- group by : 특정 컬럼으로 구룹핑 -> 그룹내의 평균이나 합과 같은 집합 함수를 사용할 수 있다
+
+-- 부서번호를 기준으로 그룹핑 
+-- -> 급여의 총합, 평균, 최대, 최소, 사원의 수, 
+--    커미션을 받는 샇람, 커미션 평균, 커미션 총합
+select  deptno, 
+        count(*) as "사원 수",
+        sum(sal) as "급여 총합",
+        trunc(avg(sal)) as "급여 평균",
+        max(sal) as "최대 급여",
+        min(sal) as "최소 급여",
+        count(comm) as "커미션 대상자 수",
+        nvl(sum(comm),0) as "커미션 총합",
+        nvl(avg(comm),0) as "커미션 평균"
+from emp
+--where deptno != 20
+group by deptno
+--having avg(sal) >= 2000
+having max(sal) > 2900
+order by deptno
+;
 
 

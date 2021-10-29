@@ -121,7 +121,7 @@ where deptno = 10 or deptno = 20  order by ename desc
 --8. 사원의 급여가 2000에서 3000사이에 포함되고 부서번호가 20 또는 30인 사원의 이름, 급여와 부서번호를 출력, 이름순(오름차순)으로 출력하시오.
 select ename, sal, deptno
 from emp
-where sal between 2000 and 3000 or deptno = 20 or deptno = 30 order by ename asc
+where sal between 2000 and 3000 and deptno in (20,30) order by ename asc
 ;
 ​
 
@@ -137,7 +137,6 @@ where sal between 2000 and 3000 or deptno = 20 or deptno = 30 order by ename asc
 
 --9. 1981년도에 입사한 사원의 이름과 입사일을 출력하시오. (like 연산자와 와일드카드 사용
 ​
-
 ​
 
 ​
@@ -151,7 +150,7 @@ where sal between 2000 and 3000 or deptno = 20 or deptno = 30 order by ename asc
 --10. 관리자가 없는 사원의 이름과 담당 업무를 출력하시오.
 select ename, job
 from emp
-where not job = 'MANAGER'
+where mgr is null
 ;
 ​
 
@@ -168,7 +167,7 @@ where not job = 'MANAGER'
 --11. 커미션을 받을 수 있는 자격이 되는 사원의 이름, 급여, 커미션을 출력하되 급여 및 커미션을 기준으로 내림차순 정렬하여 표시하시오.
 select ename, sal, comm
 from emp
-where comm is not null order by sal, comm desc
+where comm is not null and comm>0 order by sal, comm desc
 ;
 ​
 
@@ -219,7 +218,7 @@ where ename like '%A%' and ename like '%E%'
 --14. 담당업무가 CLERK, 또는 SALESMAN이면서 급여가 $1600, $950 또는 $1300이 아닌 사원의 이름, 담당업무, 급여를 출력하시오.
 select ename, job, sal
 from emp
-where job = 'CLERK' or job = 'SALESMAN' or sal not in(1600, 950, 1300)
+where job in ('CLERK', 'SALESMAN') and sal not in(1600, 950, 1300)
 ;
 ​
 

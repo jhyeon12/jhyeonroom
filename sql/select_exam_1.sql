@@ -59,7 +59,7 @@ where sal > 2000 order by sal desc
 --4. 사원번호가 7788인 사원의 이름과 부서번호를 출력하시오.
 select ename, deptno
 from emp
-where empno='7788'
+where empno= 7788
 ;
 ​
 

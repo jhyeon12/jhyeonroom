@@ -41,7 +41,7 @@ order by sal*12+100 desc
 --3. 급여가 2000을 넘는 사원의 이름과 급여를 표현, 급여가 많은 것부터 작은 순으로 출력하시오.
 select ename, sal
 from emp
-order by sal desc
+where sal > 2000 order by sal desc
 ;
 
 ​

@@ -62,7 +62,7 @@ public class VO_Sales {
 		return "VO_Sales [productName=" + productName + ", quantity=" + quantity + ", price=" + price + ", calorie="
 				+ calorie + ", type=" + type + "]";
 	}
-
+    @Override
 	public boolean equals(Object o) {
 		boolean result = false;
 	        if (o instanceof VO_Sales) {
@@ -73,4 +73,5 @@ public class VO_Sales {
 	        }
 	       return result;
 	    }
+
 }

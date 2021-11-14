@@ -2,92 +2,62 @@ package kiosk;
 
 public class VO_Orders {
 
-	private int productNumber; // 주문번호
-	private int ticketnumber;      // 번호표
-	private String PurchaseDate;   // 구매일자
-	private int ageGroup;// 연령대
- 	private int productId; // 상품번호
+	private int ticketnumber;  // 번호표
+	private int ProductId;
+	private String PurchaseDate;   // 구매일자		
+	private String ageGroup;// 연령대
  	private String eatHereOrNOt;
- 	private VO_Sales myBasket;
+ 	private String TableService;
+ 	
+ 	
  
  	
  	public VO_Orders() {
 
 	}
  	
- 	public VO_Orders(int productNumber, int ticketnumber, String purchaseDate, int ageGroup, int productId, VO_Sales myBasket) {
+ 	public VO_Orders(int ticketnumber, int productId, String purchaseDate) {
 
-		this.productNumber = productNumber;
+		
 		this.ticketnumber = ticketnumber;
+		this.ProductId = productId;
 		this.PurchaseDate = purchaseDate;
-		this.ageGroup = ageGroup;
-		this.productId = productId;
-		this.myBasket = myBasket;
 		
 	}
-	
-    
-	public void setProductNumber(int productNumber) {
-		this.productNumber = productNumber;
-	}
-
-	public void setTicketnumber(int ticketnumber) {
-		this.ticketnumber = ticketnumber;
-	}
-
-	public void setPurchaseDate(String purchaseDate) {
-		PurchaseDate = purchaseDate;
-	}
-
-	public void setAgeGroup(int ageGroup) {
-		this.ageGroup = ageGroup;
-	}
-
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
-
-	public void setEatHereOrNOt(String eatHereOrNOt) {
-		this.eatHereOrNOt = eatHereOrNOt;
-	}
-
-	public int getProductNumber() {
-		return productNumber;
-	}
-
-	public int getTicketnumber() {
-		return ticketnumber;
-	}
-	
-	public String getPurchaseDate() {
-		return PurchaseDate;
-	}
-
-	public int getAgegroup() {
-		return ageGroup;
-	}
-	
-	public int getProductId() {
-		return productId;
-	}
+ 	
+ 	public void setTableService(String arg) {
+ 		this.TableService = arg;
+ 	}
+ 	
+ 	public void setEatHereOrNot(String arg) {
+ 		this.eatHereOrNOt = arg;
+ 	}
+ 	
+ 	public void setAgeGroup(String arg) {
+ 		this.ageGroup = arg;
+ 	}
+ 	public String getAgeGroup() {
+ 		return this.ageGroup;
+ 	}
+ 	
+ 	public void setPurchaseDate(String arg) {
+ 		this.PurchaseDate = arg;
+ 	}
+ 	public void setProductId(int num) {
+ 		this.setProductId(num);
+ 	}
+ 
+ 	public String getPurchaseDate() {
+ 		return this.PurchaseDate;
+ 	}
+ 	
+ 	public String getTableService() {
+ 		return this.TableService;
+ 	}
+ 	public String getEatHereOrNot() {
+ 		return this.eatHereOrNOt;
+ 	}
 
 
-	@Override
-	public String toString() {
-		return "Orders [productNumber=" + productNumber + ", ticketnumber=" + ticketnumber + ", PurchaseDate="
-				+ PurchaseDate + ", ageGroup=" + ageGroup + ", productId=" + productId + "]";
-	}
-	
-	
-    @Override
-	public boolean equals(Object o) {
-        if (o instanceof VO_Orders) {
-        	VO_Orders b = (VO_Orders) o;
-            if (this.productNumber == b.productNumber) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 }

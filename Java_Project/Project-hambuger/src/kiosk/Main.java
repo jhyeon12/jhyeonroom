@@ -1,10 +1,6 @@
 package kiosk;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class Main {
 
@@ -24,7 +20,7 @@ public class Main {
 //	System.out.println(SortPrinting.ROOF.length());
 	//	System.out.println((int) Math.ceil((double) (3) / 3));
 
-//		String width = new String("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+//		String width = new String("┏━━━━━━1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 //		System.out.println(width.length());
 //		
 

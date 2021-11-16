@@ -2,6 +2,7 @@ package kiosk;
 
 public class VO_Sales {
 
+
 	 private int productId;// 상품번호
 	 private String  productName; //  판매 상품명
 	 
@@ -73,5 +74,6 @@ public class VO_Sales {
 	        }
 	       return result;
 	    }
+
 
 }

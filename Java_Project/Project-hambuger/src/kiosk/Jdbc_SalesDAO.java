@@ -5,26 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class Jdbc_SalesDAO {
-
-	private Jdbc_SalesDAO() {
-	}
-
+    //////////////////////////////////////////////////////SingleTon
+	private Jdbc_SalesDAO() {}
 	// 클래스 내부에서 인스턴스 생성
 	private static Jdbc_SalesDAO dao = new Jdbc_SalesDAO();
-
 	// 내부에서 만들어진 인스턴스를 특정 메소드를 이용해서 받을 수 있도록 함
-	static public Jdbc_SalesDAO getInstance() {
+	public static Jdbc_SalesDAO getInstance() {
 		return dao;
 	}
+	///////////////////////////////////////////////////////////////
 
 	public List<VO_Sales> recoHamburgerForAll(Connection conn) {
-		String sql = SQLQuery.SHOWRECOMMENDED;
+		String sql = SQLQuery.SHOW_RECOMMENDED;
 
 		ResultSet rs = null;
 		Statement stm = null;
@@ -58,7 +55,7 @@ public class Jdbc_SalesDAO {
 
 	// 고령자에 안성맞춤인 햄버거 메뉴 출력
 	public List<VO_Sales> showRecoForTheOld(Connection conn) {
-		String sql = SQLQuery.showHamburgerForTheOld;
+		String sql = SQLQuery.SHOW_BURGER_FOR_THE_OLD;
 
 		ResultSet rs = null;
 		Statement stm = null;
@@ -100,7 +97,7 @@ public class Jdbc_SalesDAO {
 
 		// sql : select
 		// 1. 해당 ? (상품이름)에 대해 재고에서 해당 상품에 들어가는 재고를 뺀 결과를 보내줌(Java 의 ResultSet에 저장용)
-		String sql = "select ingre_stock-ingre_need from (select * from sales s1 natural join ingredient where s1.s_name = ?)";
+		String sql = SQLQuery.OUT_OF_STOCK;
 
 		try {
 
@@ -143,7 +140,7 @@ public class Jdbc_SalesDAO {
 
 		// sql : select
 		// 2. 해당 ?(상품이름) 필요재료를 재고에서 차감
-		String sql = "update ingredient i1 set ingre_stock = ingre_stock - ingre_need*? where i1.s_id = (select s_id from sales s1 where s1.s_name = ?)";
+		String sql = SQLQuery.RECIEVE_ORDER;
 
 		if (outOfStock(conn, sales)) {
 			System.err.println("재고가 없어 주문할 수 없습니다.");
@@ -178,7 +175,7 @@ public class Jdbc_SalesDAO {
 
 		VO_Sales sales = null;
 
-		String sql = "select * from sales where s_name = ? ";
+		String sql = SQLQuery.SELECT_SALES_BY_NAME;
 
 		try {
 
@@ -201,18 +198,18 @@ public class Jdbc_SalesDAO {
 		return sales;
 	}
 
-	public List<VO_Sales> sendSalesByType(Connection conn, String drinkType) {
+	public List<VO_Sales> sendSalesByType(Connection conn, String type) {
 
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		List<VO_Sales> list = new LinkedList<VO_Sales>();
-		StringTokenizer tk = new StringTokenizer(drinkType, "/");
+		StringTokenizer tk = new StringTokenizer(type, "/");
 
-		String sql = "select * from sales where s_type = ?";
+		String sql = SQLQuery.SELECT_SALES_BY_TYPE;
 
 		try {
 			pstm = conn.prepareStatement(sql);
-			if (drinkType.contains("/")) {
+			if (type.contains("/")) {
 				while (tk.hasMoreTokens()) {
 					pstm.setString(1, tk.nextToken());
 					rs = pstm.executeQuery();
@@ -222,7 +219,7 @@ public class Jdbc_SalesDAO {
 					}
 				}
 			} else {
-				pstm.setString(1, drinkType);
+				pstm.setString(1, type);
 				rs = pstm.executeQuery();
 				while (rs.next()) {
 					list.add(new VO_Sales(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
@@ -243,7 +240,7 @@ public class Jdbc_SalesDAO {
 
 	// 사이드 메뉴를 list로 만들어 반환
 	public List<VO_Sales> sendSideMenu(Connection conn) {
-		String sql = "select * from sales where s_type = 'Side' ";
+		String sql = SQLQuery.SHOW_SIDE;
 
 		ResultSet rs = null;
 		Statement stm = null;
@@ -270,4 +267,7 @@ public class Jdbc_SalesDAO {
 		return sideList;
 
 	}
+	
+
+
 }

@@ -24,7 +24,7 @@ public class Lotto {
 		
 		for(int i = 0; i<10000; i++) {
 			// 랜덤한 index(정수) -> 1~44
-			int index = (int)(Math.random()*44)+1; // 0.0 <= r < 45.0 => 44
+			int index = (int)(Math.random()*8)+1; // 0.0 <= r < 45.0 => 44
 			
 			temp = ball[0];
 			ball[0] = ball[index];

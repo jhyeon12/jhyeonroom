@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 폼</title>
+</head>
+<body>
+
+    <h1>로그인 폼</h1>
+    <hr>
+    
+    <form>
+        <fieldset>
+            <legend>로그인 폼</legend>
+            <form>
+                <table>
+                    <tr>
+                        <td>순번</td>
+                        <td>
+                            <input type="text" value="11"
+                                    readonly
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>선택</td>
+                        <td>
+                            <select name="loginType">
+                                <option value="member">회원</option>
+                                <option value="admin">admin</option>
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="userid">아이디</label>  </td>
+                        
+                        <td><input type="text" name="userid" id="userid" 
+                            required
+                            placeholder="아이디를 입력하세요"
+                            autofocus
+                            minlength="4"
+                            maxlength="12"
+                            ></td>
+                    </tr>
+                    <tr>
+                        <td><label for="pw">비밀번호</label></td>
+                        
+                        <td><input type="password" name="password" id="pw" 
+                            required
+                            placeholder="비밀번호를 입력하세요"
+                            ></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit"></td>
+                    </tr>
+                </table>
+            </form>
+
+        </fieldset>
+    </form>
+
+
+</body>
+</html>

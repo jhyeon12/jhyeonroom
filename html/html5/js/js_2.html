@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        //자바스크립의 변수 특징
+        // 호이스팅-> 변수선언과 동시에 초기화 하지 않는 경우 자동으로 undifind
+
+        // 변수 선언 방법 => var 변수이름(식별자);
+        // var => 생명주기
+        // => 함수 단위로 생명주기가 발생
+        // => 함수 밖에서 선언하면 전역 변수가 된다.
+
+        // 변수에 저장하는 데이터 타입 : 숫자, 문자열, bool, 함수, 객체(배열...)
+
+        var num; // 전역변수
+
+        console.log("num =>", num);
+
+        // 함수 호출
+        fn();
+
+        // 함수 정의 : 프로그램이 실행 되기전에 먼저 실행된다.
+        function fn() {
+            num = 11;
+            var age = 10; // 함수 내에서 존재하는 변수
+            console.log('age1=>', age);
+            console.log('num1=>', num);
+
+            // 상수를 만드는  const => 초기화 후 값을 대입하지 못한다.
+            const no = 7;
+            //no = 777;
+
+            // let : 생명주기가 블록{}을 기준으로 생성
+            for (let i = 0; i < 5; i++) {
+                console.log(i);
+            }
+            /* console.log('for문 밖에서 출력하는 i =>', i); */
+        }
+
+
+
+        /* console.log('age2=>', age);
+        console.log('num2=>', num); */
+
+        /* alert(10+10); */
+        /* alert(111);
+        alert('<a href="www.naver.com">'); */
+
+        if (false) {
+            console.log('if => true')
+        } else {
+            console.log('if => false')
+        }
+
+        console.log(true); //True
+        console.log(false); //False
+        console.log('true>false => 1>0 =>', true > false);
+        /* 논리값 true/false
+           비교연산(> < >= <= == !=)
+           논리연산( && || !) 
+        */
+
+        console.log(111 / 0);
+        console.log('test \n tester');
+        console.log('age:', 11);
+        console.log('errorcode:', 404);
+        console.log(25.123);
+        console.log(12 + 12 * 4);
+        console.log(3 % 7);
+        // 숫자연산을 위한 산술연산이 가능
+        // 숫자는 정수와 실수를 구분하지 않는다.
+
+        ////////////////////////////////////////////////////////
+
+        /* 
+           변수에서 정의 할 수 있는 타입
+           문자열, 숫자, 불리언, 함수, 객체, undefined 
+        */
+        console.log('--------------------------------------');
+        var stringVar = 'String';
+        console.log(stringVar, typeof (stringVar));
+        var numberVar = 100;
+        console.log(numberVar, typeof (numberVar));
+        var booleanVar = false;
+        console.log(booleanVar, typeof (booleanVar));
+        var functionVar = function () { };
+        console.log(functionVar, typeof (functionVar));
+        var objectVar = {}; //객체 생성 -> {} 중괄호 블록을 사용
+        console.log(objectVar, typeof (objectVar));
+        var objArrayVar = []; // 배열 객체
+        console.log(objArrayVar, typeof (objArrayVar));
+        var value;
+        console.log(value, typeof (value));
+        if (typeof (value) == 'undefined') {
+            console.log('연산불가');
+        } else {
+            //연산
+        }
+        console.log('--------------------------------------');
+
+        // 브라우저가 HTML문서의 모든 내용을 메모리에 올리는 과정이 끝날 때 발생하는 이벤트를 등록
+        window.onload = function () {
+            var html = document.body.innerHTML;
+            var text = document.body.innerText;
+
+            /*  console.log('innerHTML :', html);
+             console.log('innerText :', text); */
+
+            var list = '<ul>';
+            list += '  <li>HTML</li>'
+            list += '  <li>CSS3</li>'
+            list += '  <li>Javascript</li>'
+            list = '</ul>';
+
+            //document.body.innerHTML=list;
+            document.body.innerText = list;
+        };
+
+        var name = '손흥민';
+        var name = '이강인';
+
+        console.log('name', name);
+
+        var name = 123;
+
+        console.log('name:', name);
+
+        var name = false;
+
+        console.log('name:', name);
+
+        // confirm() 함수 : 사용자에서 true/false 확인하는 함수
+        /* var check = confirm('삭제하시겠습니까?')
+        console.log('check:', check);
+        if(check){
+            alert('삭제했습니다.')
+        }else{
+            alert('삭제를 취소하였습니다.')
+        } */
+
+        //문자열의 덧셈 : 문자열 + anytype => 문자열 + 문자열 = 문자열
+        console.log('"100+10"', '100+10');
+        console.log('"100"+10', '100' + 10);
+        console.log('100"10"', 100 + '10');
+        console.log('100+"10"', 100 + '10');
+        console.log('"100"+"10"', '100' + '10');
+
+        console.log('"100"*10', '100' * 10);
+
+
+
+        //////////////////////////////////////////////////////
+        //prompt(string, string) => string
+        //var input = prompt('숫자를 입력하세요');
+        //console.log('input:', input, typeof(input));
+
+        //var numberInput = Number(input);
+        //console.log('numberInput', numberInput, typeof(numberInput));
+
+        //var numberStr = String(123);
+        //console.log('numberStr', numberStr, typeof(numberStr));
+
+
+        console.log('----------------------------------------------------');
+        console.log(Boolean(0));
+        console.log(Boolean(10));
+        console.log(Boolean(NaN));
+        console.log(Boolean(''));
+        console.log(Boolean('abc'));
+        console.log(Boolean(null));
+        console.log(Boolean(undefined));
+
+        if (value) {
+            console.log('0의 논리값', 'true 입니다')
+        } else {
+            console.log('0의 논리값', 'false 입니다.')
+        }
+        console.log('---------------------------------------');
+        // 비교연산 시 자동 형변환
+        console.log("''==false", '' == false);
+        // 타입일치 여부도 확인 후 결과 반환
+        console.log("''===false => ", '' === false);
+
+        console.log("''==0 =>", '' == 0);
+        console.log('0--false =>', 0 == false);
+
+        //////////////////////////////////////
+        // 삼항연산자
+        // (논리값) ? 논리값이 true 일때 실행할 문장   :  논리값이 false 일때 실행 할 문장
+
+
+        // 짧은 조건문
+        //   (논리값) || 논리값이 false 일때만 실행할 문장
+
+        var input = prompt('0을 제외한 숫자를 입력하세요'); // test
+        var numberInput = Number(input);  // NaN
+
+        numberInput = numberInput || 100;  // false || 
+
+        // console.log('입력 값 =>', numberInput);
+
+        ///////////////////////////////////////////////////
+        // 배열 : 많은 변수를 묶음으로 처리할수 있는 객체
+        // 요소 타입의 제한이 없다! -> 모든타입의 데이터가 요소가 될 수 있다!
+
+        var array = []; // 배열 생성 : []
+
+        array = [1, 4, 8, 10, 77, 34];  // 숫자데이터 들을 요소로 가지는 배열
+
+        console.log('---------------------------------');
+        console.log(array);
+
+        array = [100, '손흥민', false, function () { }, {}, [1, 77]];
+        console.log(array);
+
+        // 배열의 요소 참조
+        console.log('array[1] : ', array[1]);
+
+
+        console.log('---------------------------------');
+        // 배열 => 인덱스값을 이용해서 반복문 활용 -> 일괄 처리
+        for (let i = 0; i < array.length; i++) {
+            console.log(i, array[i]);
+        }
+
+
+        ////////////////////////////////////////////////
+
+        var num = 0;
+        while (num < 5) {
+
+            num++; // 탈출을 위한 증가식
+        }
+
+        while (true) {
+
+            // 탈출 코드 : break
+            if (num == 10) {
+                break;
+            }
+
+            num++;
+        }
+
+
+        console.log('--------------------------')
+        for (let item in array) {
+            console.log(item, typeof (item), array[item]);
+        }
+
+        console.log('--------------------------')
+        // 반복문의 중첩
+        for (let i = 0; i < 9; i++) {
+            let str = '';
+            for (let j = 0; j < i + 1; j++) {
+                str += '*';
+            }
+            console.log(str);
+        }
+
+
+        ////////////////////////////////
+
+        console.log('continue 실행 예제');
+        for (let i = 1; i < 11; i++) {
+
+            if (i % 2 == 1) {
+                continue;
+            }
+
+
+            console.log(i);
+        }
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+    <h1>안녕하세요</h1>
+
+</body>
+
+</html>

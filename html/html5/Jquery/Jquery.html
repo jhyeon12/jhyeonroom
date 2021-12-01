@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+    <script>
+        // $ -> jQuery
+        // $() : jQuery 객체생성 메소드 
+        // $(선택자 또는 객체) -> jQuery 객체로 변환
+        // $(document).ready(fn()) : onload 속성에 핸들러 적용과 같다.
+        $(document).ready(function(){
+            //alert('onload');
+            //$('h1').html('test');
+
+            // 문서 객체 생성 : $('선택자')
+            //$('*').css('color', 'red');
+
+            // 선택자를 이용한 문서객체 캐스팅
+            var uid = $('#userid').val(); 
+            // .val() :  input value 값을 가져오는 getter 메소드
+            console.log('uid', uid);
+            // .val(String) : input value 값에 매개변수의 인자값으로 setter
+            // $('input[type=text]').val('손흥민');
+            $('input:text').val('반갑습니다.');
+
+            setTimeout(function(){
+                var selectValue = $('select>option:selected').val();
+                console.log('selectValue', selectValue);
+
+                var checkedValue = $('input:radio:checked').val();
+                console.log('checkedValue', checkedValue);
+            },3000);
+
+            $('table tr:odd').css('background-color', '#aaa');
+            $('table tr:even').css('background-color', 'yellow');
+
+            $('table tr:first').css('background-color', '#000').css('color', '#fff');
+            $('table tr:last').css('background-color', '#000').css('color', '#0f0');
+            
+            //////////////////////////////
+            var links = [
+                {name:'네이버', url: 'https://www.naver.com'},
+                {name:'다음', url: 'https://www.daum.net'},
+                {name:'카카오', url: 'https://www.kakao.com'}
+            ];
+
+            // 배열의 요소 데이터를 이용해서 화면을 구성
+            var newHtml = '';
+
+            // 배열을 $.each() 메소드로 처리
+            $.each(links, function(index, item){
+                console.log(index, item);
+
+                newHtml += '<a href="'+item.url+'">'+item.name+'</a>\n';
+                // <a href="https://www,naver.com>네이버</a>"
+            });
+
+            console.log(newHtml);
+            
+            console.log($('#linkbox').html());
+
+            $('#linkbox').html(newHtml);
+            //document.getElementById('linkbox').innerHTML=newHtml;
+
+
+
+
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <div id="linkbox">
+        링크 정보가 위치합니다.
+    </div>
+
+    <hr>
+
+    <table border="1">
+        <tr>
+            <th>thead - 1</th>
+            <th>thead - 2</th>
+        </tr>
+        <tr>
+            <td>1 - 1</td>
+            <td>1 - 2</td>
+        </tr>
+        <tr>
+            <td>2 - 1</td>
+            <td>2 - 2</td>
+        </tr>
+        <tr>
+            <td>3 - 1</td>
+            <td>3 - 2</td>
+        </tr>
+        <tr>
+            <td>4 - 1</td>
+            <td>4 - 2</td>
+        </tr>
+        <tr>
+            <td>tfoot - 1</td>
+            <td>tfoot - 2</td>
+        </tr>
+
+    </table>
+
+
+    <hr>
+
+    남자<input type="radio" name="gender" value="1"> 
+    여자<input type="radio" name="gender" value="2">
+
+    <br>
+    <select>
+        <option value="HTML5">HTML5</option>
+        <option value="CSS3">CSS3</option>
+        <option value="Javascript">Javascript</option>
+    </select>
+
+
+    <hr>
+
+    <input type="text" id="userid" value="test123">
+
+    <hr>
+
+    <h1>안녕</h1>
+</body>
+
+</html>

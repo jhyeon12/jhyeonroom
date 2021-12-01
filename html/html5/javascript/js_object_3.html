@@ -97,7 +97,11 @@
         var arr5 = [101,77, 300, 23, 50];
         console.log(arr5);
 
-        arr5.sort();
+        arr5.sort(function(left, right){
+            // return left-right;
+            return right-left;
+        });
+
         console.log(arr5);
 
 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        /* 1. 태그 동적 생성
+            1. 태그 엘리먼트 객체를 생성
+            2. 텍스트 노드 객체를 생성 ( 단일 태그 제외 )
+            3. 태그 엘리먼트 객체에 텍스트 노드 객체를 추가
+            4. 태그 엘리먼트가 들어가야 할 위치의 부모 태그를 캐스팅 하고 추가
+
+        */
+
+        window.onload = function(){
+
+            // h1 태그 엘리먼트 객체 생성
+            var header = document.createElement('h1');
+            var div = document.createElement('div');
+
+            var img = document.createElement('img');
+
+            // 텍스트 노드 생성
+            var text = document.createTextNode('hello~ DOM!!!');
+            var text1 = document.createTextNode('DIV - 1');
+
+            // 텍스트노드를 태그 엘리먼트로 추가
+            header.appendChild(text);
+            div.appendChild(text1);
+
+
+            // img 태그의 속성 추가
+            //img.src='../starwars.png';
+            //img.width=100;
+            //img.height=200;
+            
+            // 속성을 추가하는 메소드
+            img.setAttribute('src', '../mini1.jpg');
+            img.setAttribute('width', 200);
+
+
+
+
+
+            // body 태그 케스팅하고 header 를 추가
+            document.body.appendChild(div);
+            document.body.appendChild(header);
+
+            document.body.appendChild(img);
+
+
+            
+
+        };
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -25,16 +25,18 @@ $(document).ready(function(){
     // 데이터 캐스팅 -> 객체 -> 배열에 저장
 
     // 폼태그 캐스팅
-    var regForm = document.getElementById('regForm');
+    var regForm = $('#regForm');
 
-    var userId = document.querySelector('#userId');
-    var pw = document.querySelector('#pw');
-    var repw = document.querySelector('#repw');
-    var userName = document.querySelector('#userName');
+    var userId = $('#userId');
+    var pw = $('#pw');
+    var repw = $('#repw');
+    var userName = $('#userName');
 
     // 이벤트 설정 : 입력
-    regForm.onsubmit = function(){
-
+    // 2021.12.02
+    // by hyun
+    // jquery 이벤트로 변경
+    regForm.submit(function(){
         //alert('onsubmit!!');
         // 데이터 받아서 객체 생성
         
@@ -42,44 +44,52 @@ $(document).ready(function(){
 
         // 사용자 입력 값의 유효성 검사
         // 아이디 검사 : 공백, 문자열의 개수 6~12, 서버통신(비동기 통신) 아이디 중복여부
-        if(userId.value.trim().length==0){
+        if(userId.val().trim().length==0){
             // msgid 캐스팅 => 문자열 추가
-            document.querySelector('#msgId').innerHTML='아이디는 필수항목입니다.';
+            $('#msgId').html('아이디는 필수 항목 입니다.');
+            // document.querySelector('#msgId').innerHTML='아이디는 필수항목입니다.';
             // 포커스 이동
             //userId.focus();
             // 문제가 발생 했기 때문에 객체 생성을 하면 안된다!
             return false;
-        } else if(!(userId.value.trim().length>2 && userId.value.trim().length<9)){
-            document.querySelector('#msgId').innerHTML='아이디는 3~8자리까지 가능합니다.';
+        } else if(!(userId.val().trim().length>2 && userId.val().trim().length<9)){
+            // document.querySelector('#msgId').innerHTML='아이디는 3~8자리까지 가능합니다.';
+            $('#msgId').html('아이디는 3~8자리까지 가능합니다');
             return false;
         }
 
 
         // 비밀번호 검사 : 공백, 4~10자
-        if(pw.value.trim().length==0){
-            document.querySelector('#msgPw').innerHTML='비밀번호는 필수항목입니다.';
+        if(pw.val().trim().length==0){
+            // document.querySelector('#msgPw').innerHTML='비밀번호는 필수항목입니다.';
+            $('#msgPw').html('비밀번호는 필수항목입니다.');
             return false;
-        } else if(!(pw.value.trim().length>=4&&pw.value.trim().length<=10)){
-            document.querySelector('#msgPw').innerHTML='비밀번호는 4~10자리까지 가능.';
+        } else if(!(pw.val().trim().length>=4&&pw.val().trim().length<=10)){
+            // document.querySelector('#msgPw').innerHTML='비밀번호는 4~10자리까지 가능.';
+            $('#msgPw').html('비밀번호는 4~10자리까지 가능.');
             return false;
         }
 
 
         // 비밀번호 확인 : 공백, 비밀번호와 일치 여부
-        if(repw.value.trim().length==0){
-            document.querySelector('#msgRePw').innerHTML='비밀번호 확인은 필수입니다.';
+        if(repw.val().trim().length==0){
+            // document.querySelector('#msgRePw').innerHTML='비밀번호 확인은 필수입니다.';
+            $('#msgRePw').html('비밀번호 확인은 필수입니다.');
             return false;
-        } else if (repw.value!=pw.value){
-            document.querySelector('#msgRePw').innerHTML='비밀번호와 일치하지 않습니다.';
+        } else if (repw.val()!=pw.val()){
+            // document.querySelector('#msgRePw').innerHTML='비밀번호와 일치하지 않습니다.';
+            $('#msgRePw').html('비밀번호와 일치하지 않습니다.');
             return false;
         }
 
         // 이름 검사 :  공백, 2자 이상
-        if(userName.value.trim().length==0){
-            document.querySelector('#msgName').innerHTML='이름은 필수항목 입니다.';
+        if(userName.val().trim().length==0){
+            // document.querySelector('#msgName').innerHTML='이름은 필수항목 입니다.';
+            $('#msgName').html('이름은 필수항목 입니다.');
             return false;
-        } else if(userName.value.trim().length<2){
-            document.querySelector('#msgName').innerHTML='이름은 2글자 이상 작성해야합니다.';
+        } else if(userName.val().trim().length<2){
+            // document.querySelector('#msgName').innerHTML='이름은 2글자 이상 작성해야합니다.';
+            $('#msgName').html('이름은 2글자 이상 작성해야합니다.');
             return false;
         }
 
@@ -88,7 +98,7 @@ $(document).ready(function(){
 
 
         // 객체 생성
-        var member = new Member(userId.value, pw.value, userName.value);
+        var member = new Member(userId.val(), pw.val(), userName.val());
         console.log('member', member);
 
         // 객체를 배열에 저장
@@ -101,81 +111,137 @@ $(document).ready(function(){
 
         // form 초기화
         // this : 이벤트가 발생한 객체 -> regForm
-        this.reset();
+        // $(this).reset();
 
         // 회원 리스트 갱신
         setMemberList()
     
         return false;
-    };
+    });
+
+    
 
     // 입력 폼에 focus 가 들어가면 아래 메시지 삭제
-    userId.addEventListener('focus', function(){
-        document.querySelector('#msgId').innerHTML='';
+    // userId.addEventListener('focus', function(){
+    //     document.querySelector('#msgId').innerHTML='';
+    // });
+    userId.focusin(function(){
+        $('#msgId').html('');
     });
 
-    pw.addEventListener('focus', function(){
-        document.querySelector('#msgPw').innerHTML='';
+    // pw.addEventListener('focus', function(){
+    //     document.querySelector('#msgPw').innerHTML='';
+    // });
+    pw.focusin(function(){
+        $('#msgPw').html('');
     });
 
-    repw.addEventListener('focus', function(){
-        document.querySelector('#msgRePw').innerHTML='';
+    // repw.addEventListener('focus', function(){
+    //     document.querySelector('#msgRePw').innerHTML='';
+    // });
+    repw.focusin(function(){
+        $('#msgRePw').html('');
     });
 
-    userName.addEventListener('focus', function(){
-        document.querySelector('#msgName').innerHTML='';
+    // userName.addEventListener('focus', function(){
+    //     document.querySelector('#msgName').innerHTML='';
+    // });
+    userName.focusin(function(){
+        $('#msgName').html('');
     });
+   
 
     ///////////////////////////////////////////////////////
     // 수정 폼 이벤트 설정
 
-    var editForm = document.querySelector('#editForm');
-    var index = document.querySelector('#index');
+    var editForm = $('#eidtForm');//document.querySelector('#editForm');
+    var index = $('#index');//document.querySelector('#index');
     //var eid = document.querySelector('#eid');
-    var epw = document.querySelector('#epw');
-    var erepw = document.querySelector('#erepw');
-    var ename = document.querySelector('#ename');
-    var resetBtn = document.querySelector('#resetBtn');
+    var epw = $('#epw'); //document.querySelector('#epw');
+    var erepw = $('#erepw'); //document.querySelector('#erepw');
+    var ename = $('#ename'); //document.querySelector('#ename');
+    var resetBtn = $('#resetBtn'); //document.querySelector('#resetBtn');
 
-    editForm.onsubmit = function(){
-
+    editForm.submit(function{
         // index 값 존재 유무 확인!!!!
-        if(index.value.trim().length==0){
+        if(index.val().trim().length==0){
             alert('유요한 인덱스값이 아닙니다.\n프로그램을 다시 시작하세요.');
             return false;
         }
         // epw 공백, 문자사이즈
-        if(epw.value.trim().length==0){
+        if(epw.val().trim().length==0){
             alert("비밀번호는 필수항목 입니다.");
-            epw.focus();
+            epw[0].focus();
             return false;
-        } else if(!(epw.value.trim().length>=4&&epw.value.trim().length<=10)){
+        } else if(!(epw.val().trim().length>=4&&epw.val().trim().length<=10)){
             alert("비밀번호는 4~10자리 문자열만 가능합니다.");
-            epw.focus();
+            epw[0].focus();
             return false;
         }
 
         // erepw 공백, epw 일치여부
-        if(erepw.value.trim().length==0){
+        if(erepw.val().trim().length==0){
             alert("비밀번호 확인은 필수항목 입니다.");
-            erepw.focus();
+            erepw[0].focus();
             return false;
-        } else if(!(erepw.value==epw.value)){
+        } else if(!(erepw.val()==epw.val())){
             alert("비밀번호가 일치하지 않습니다.");
-            erepw.focus();
+            erepw[0].focus();
             return false;
         }
 
         // ename 공백, 문자열 사이즈
-        if(ename.value.trim().length==0){
+        if(ename.val().trim().length==0){
             alert('사용자의 이름은 필수항목입니다.');
-            ename.focus();
+            ename[0].focus();
             return false;
-        } else if(ename.value.trim().length<2){
+        } else if(ename.val().trim().length<2){
             alert('사용자의 이름은 2글자 이상 입력해야합니다.');
-            ename.focus();
+            ename[0].focus();
             return false;
         }
+
+    });
+
+    // editForm.onsubmit = function(){
+
+    //     // index 값 존재 유무 확인!!!!
+    //     if(index.value.trim().length==0){
+    //         alert('유요한 인덱스값이 아닙니다.\n프로그램을 다시 시작하세요.');
+    //         return false;
+    //     }
+    //     // epw 공백, 문자사이즈
+    //     if(epw.value.trim().length==0){
+    //         alert("비밀번호는 필수항목 입니다.");
+    //         epw.focus();
+    //         return false;
+    //     } else if(!(epw.value.trim().length>=4&&epw.value.trim().length<=10)){
+    //         alert("비밀번호는 4~10자리 문자열만 가능합니다.");
+    //         epw.focus();
+    //         return false;
+    //     }
+
+    //     // erepw 공백, epw 일치여부
+    //     if(erepw.value.trim().length==0){
+    //         alert("비밀번호 확인은 필수항목 입니다.");
+    //         erepw.focus();
+    //         return false;
+    //     } else if(!(erepw.value==epw.value)){
+    //         alert("비밀번호가 일치하지 않습니다.");
+    //         erepw.focus();
+    //         return false;
+    //     }
+
+    //     // ename 공백, 문자열 사이즈
+    //     if(ename.value.trim().length==0){
+    //         alert('사용자의 이름은 필수항목입니다.');
+    //         ename.focus();
+    //         return false;
+    //     } else if(ename.value.trim().length<2){
+    //         alert('사용자의 이름은 2글자 이상 입력해야합니다.');
+    //         ename.focus();
+    //         return false;
+    //     }
 
         // index 위치의 배열의 요소에 현재 캐스팅한 데이터를 입력
         members[index.value].pw=epw.value.trim();

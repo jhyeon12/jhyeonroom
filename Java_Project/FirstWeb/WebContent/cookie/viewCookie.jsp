@@ -1,7 +1,12 @@
+<%@page import="util.CookieBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	Cookie[] cookies = request.getCookies();
+
+	// 2021.10.09
+	CookieBox cookieBox = new CookieBox(request);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +38,22 @@
 				}
 			}
 		%>
+		
+		<hr>
+		
+		<h3>
+			<%= cookieBox.exists("uid") %> / <%= cookieBox.exists("uName") %> 
+		</h3>
+		<h3>
+			<%
+				if(cookieBox.exists("uid")){
+					Cookie c = cookieBox.getCookie("uid");
+					out.println(c.getName()+"="+cookieBox.getValue(c.getName()));
+				}
+			%>
+		</h3>
+		
+		<hr>
 		
 		<a href="editCookie.jsp">쿠키값 수정</a> <br>
 		<a href="deleteCookie.jsp">쿠키값 삭제</a>

@@ -1,7 +1,10 @@
++<%@page import="util.CookieBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	Cookie[] cookies = request.getCookies();
+
+	CookieBox cookieBox = new CookieBox(request);
 %>
 <!DOCTYPE html>
 <html>
@@ -31,6 +34,13 @@
 					
 				}
 			}
+			
+			//////////////////////////////////////////
+			// CookieBox를 이용한 쿠키 삭제
+			if(cookieBox.exists("uid")){
+				response.addCookie(CookieBox.createCookie("uid", "", 0));
+			}
+			
 		%>
 		
 		<a href="viewCookie.jsp">쿠키 보기</a>

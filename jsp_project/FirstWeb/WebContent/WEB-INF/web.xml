@@ -10,7 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-<!--   서블릿 등록: 이름과 클래스 경로 -->
+  <!--   서블릿 등록: 이름과 클래스 경로 -->
   <servlet>
   <servlet-name>HelloServlet</servlet-name>
   <servlet-class>first.HelloServlet</servlet-class>
@@ -22,5 +22,5 @@
 		<url-pattern>/Hello</url-pattern>
 		<!-- http://localhost:8080/first/Hello -->
 	</servlet-mapping>
-  
+	
 </web-app>

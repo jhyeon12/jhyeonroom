@@ -1,0 +1,10 @@
+# 설정 파일에 등록 -> Command 클래스 생성 -> view(JSP) 생성
+# 요청경로=실행 클래스 이름
+/dept/list.do=dept.service.DeptListCommandImpl
++#/dept/regform.do=dept.service.DeptRegFormCommandImpl
++# 입력
+/dept/reg.do=dept.service.DeptRegCommandImpl
+# 수정
+/dept/edit.do=dept.service.DeptEditCommandImpl
+# 삭제
+/dept/delete.do=dept.service.DeptDeleteCommandImpl

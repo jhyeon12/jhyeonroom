@@ -116,8 +116,6 @@ public class MemberDao {
 
 		return member;
 	}
-	
-
 
 	public List<Member> selectList(Connection conn, int index, int count) throws SQLException {
 
@@ -154,13 +152,8 @@ public class MemberDao {
 	}
 
 	private Member getMember(ResultSet rs) throws SQLException {
-		return new Member(
-				rs.getInt("idx"), 
-				rs.getString("userid"), 
-				rs.getString("password"), 
-				rs.getString("username"),
-				rs.getString("regdate"), 
-				rs.getString("photo"));
+		return new Member(rs.getInt("idx"), rs.getString("userid"), rs.getString("password"), rs.getString("username"),
+				rs.getString("regdate"), rs.getString("photo"));
 	}
 
 	public int selectTotalCount(Connection conn) throws SQLException {
@@ -212,47 +205,47 @@ public class MemberDao {
 
 		return member;
 	}
-	
-public int updateMember(Connection conn, EditRequest editRequest) throws SQLException {
-		
+
+	public int updateMember(Connection conn, EditRequest editRequest) throws SQLException {
+
 		int resultCnt = 0;
 		PreparedStatement pstmt = null;
 		String sql = "update member set password=?, username=?, photo=? where idx=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, editRequest.getPw());
 			pstmt.setString(2, editRequest.getUsername());
 			pstmt.setString(3, editRequest.getFileName());
 			pstmt.setInt(4, editRequest.getIdx());
-			
+
 			resultCnt = pstmt.executeUpdate();
 		} finally {
 			JdbcUtil.close(pstmt);
 		}
-		
+
 		return resultCnt;
 	}
 
-public int deleteMemberByIdx(Connection conn, int idx) throws SQLException {
-	
-	int resultCnt = 0;
-	
-	PreparedStatement pstmt = null;
-	
-	String sql = "DELETE FROM member WHERE idx=?";
-	
-	try {
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, idx);
-		
-		resultCnt = pstmt.executeUpdate();
-		
-	} finally {
-		JdbcUtil.close(pstmt);
+	public int deleteMemberByIdx(Connection conn, int idx) throws SQLException {
+
+		int resultCnt = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = "DELETE FROM member WHERE idx=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+
+			resultCnt = pstmt.executeUpdate();
+
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+
+		return resultCnt;
 	}
-	
-	return resultCnt;
-}
 
 }

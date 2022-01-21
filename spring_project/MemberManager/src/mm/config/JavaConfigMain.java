@@ -2,18 +2,20 @@ package mm.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 
 import mm.dao.MemberDao;
 import mm.service.ChangePasswordService;
 import mm.service.MemberRegService;
 
 @Configuration
-public class JavaConfig {
+//@Import(JavaConfigSub.class)
+@ImportResource("classpath:appCtxSub.xml")
+public class JavaConfigMain {
 	
 	// MemberDao
 	@Bean(name = "dao")
-	
 	public MemberDao memberDao() {
 		return new MemberDao();
 	}
@@ -23,12 +25,7 @@ public class JavaConfig {
 	public MemberRegService regService() {
 		return new MemberRegService(memberDao());
 	}
-	// ChangePasswordService : dao 주입
-	@Bean
-	public ChangePasswordService changeService() {
-		ChangePasswordService service = new ChangePasswordService();
-		service.setDao(memberDao());
-		return service;		
-	}
+	
 
+	
 }
